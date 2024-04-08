@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../constants.dart';
 
+//deklarasi class dan memanggil beberapa fungsi yang diperlukan
 class OptionCard extends StatelessWidget {
   const OptionCard({
     Key? key,
@@ -10,6 +11,8 @@ class OptionCard extends StatelessWidget {
 
   final String option;
   final Color color;
+
+  //membuat tampilan dari setiap option dari jawaban
   @override
   Widget build(BuildContext context) {
     return Card(

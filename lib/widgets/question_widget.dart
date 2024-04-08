@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../constants.dart';
 
+//deklarasi class dan memanggil beberapa fungsi yang diperlukan
 class QuestionWidget extends StatelessWidget {
   const QuestionWidget(
   {Key? key,
@@ -10,10 +11,13 @@ class QuestionWidget extends StatelessWidget {
     this.imagePath
 }) : super(key: key);
 
+  // deklarasi variabel
   final String question;
   final int indexAction;
   final int totalQuestions;
   final String? imagePath;
+
+  //membuat tampilan dari pertanyaan
   @override
   Widget build (BuildContext context) {
     return Column(
@@ -24,7 +28,7 @@ class QuestionWidget extends StatelessWidget {
             imagePath!, // Gunakan imagePath jika tidak null
             width: 250,
             height: 200,
-          ), // Image.asset
+          ),
             SizedBox(height: 5), // Jarak antara gambar dan teks
             Text(
             'Question ${indexAction + 1}/$totalQuestions: $question',

@@ -13,8 +13,10 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+//membuat list pertanyaan dengan struktur yang sudah dideklarasikan di question model
 class _HomeScreenState extends State<HomeScreen> {
-  List<Question> _questions = [Question(
+  List<Question> _questions = [
+    Question(
       id: '1',
       title: 'Ada berapa program studi di fakultas vokasi UNESA?',
       options: {'3': false, '7': false, '5': false, '10': true}),
@@ -67,11 +69,14 @@ class _HomeScreenState extends State<HomeScreen> {
         options: {'Mencari informasi di bioskop kampus': false, 'Menulis surat ke departemen musik': false, 'Menghubungi kantor akademik': true, 'Mengajukan permohonan melalui media sosial': false}),
   ];
 
+  //deklarasi variabel
   int index = 0;
   int score = 0;
   bool isPressed = false;
   bool isAlreadySelected = false;
 
+  //membuat fungsi untuk berganti ke pertanyaan selanjutnya dan menampilkan box hasil,
+  //jika pertanyaan belum terpilih maka akan ada notifikasi
   void nextQuestion() {
     if(index == _questions.length -1){
       showDialog(
@@ -90,6 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
           isAlreadySelected = false;
         });
       }else{
+        //notifikasi untuk memilih jawaban
         ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Please select option first.'),
@@ -101,6 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  //membuat fungsi untuk check jawaban dan menentukan skor dari jawaban yang dipilih
   void checkAnswerAndUpdate(bool value){
     if(isAlreadySelected){
       return;
@@ -115,6 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  //membuat fungsi untuk mengulang kembali aplikasi dengan mereset beberapa variabel
   void startOver(){
     setState(() {
       index = 0;
@@ -130,11 +138,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
-        title: const Text('QuizMaba'),
+        title: const Text('QuizMaba'), //judul aplikasi quizmaba
         backgroundColor: background,
         shadowColor: Colors.transparent,
         actions: [
-          Padding(
+          Padding( //padding untuk menampilkan skor
             padding: const EdgeInsets.all(18.0),
             child: Text(
               'Score : $score',
@@ -147,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Container(
         width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        child: Column(
+        child: Column( //kolom yang digunakan untuk menampilkan pertanyaan yang kita input
           children: [
             QuestionWidget(
               question: _questions[index].title,
@@ -158,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const Divider(color: neutral),
             const SizedBox(height: 25.0),
             for(int i=0; i<_questions[index].options.length; i++)
-              GestureDetector(
+              GestureDetector( //fungsi untuk merubah warna dari option bagi pilihan benar atau salah
                 onTap: () => checkAnswerAndUpdate(
                     _questions[index].options.values.toList()[i]),
                 child: OptionCard(
@@ -173,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
 
-      floatingActionButton: Padding(
+      floatingActionButton: Padding( //tombol untuk pertanyaan selanjutnya
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: NextButton(
           nextQuestion: nextQuestion,
